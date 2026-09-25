@@ -1,0 +1,85 @@
+entity_id	business_name	business_address	country
+S1-00001	Metro Dental Clinic LLC	953 Main Street, Suite 11, Seattle, WA 98101	US
+S1-00002	Royal Dental Clinic LLC	990 Main Street, Suite 12, Chicago, IL 60601	US
+S1-00003	Imperial Dental Clinic LLC	28 Main Street, Suite 13, New York, NY 10001	US
+S1-00004	Horizon Dental Clinic LLC	65 Main Street, Suite 14, Austin, TX 78701	US
+S1-00005	Vanguard Dental Clinic Pvt Ltd	Plot 102, MG Road, Near Metro Pillar 4, Delhi 110001	India
+S1-00006	Zenith Dental Clinic Pvt Ltd	Plot 139, MG Road, Near Metro Pillar 5, Hyderabad 500001	India
+S1-00007	Sunrise Dental Clinic Pvt Ltd	Plot 176, MG Road, Near Metro Pillar 6, Bangalore 560001	India
+S1-00008	Evergreen Dental Clinic Pvt Ltd	Plot 213, MG Road, Near Metro Pillar 7, Mumbai 400001	India
+S1-00009	Cascade Dental Clinic SARL	250 Rue de la Paix, 13001 Marseille	France
+S1-00010	Crest Dental Clinic SARL	287 Rue de la Paix, 33000 Bordeaux	France
+S1-00011	Apex Logistics LLC	324 Main Street, Suite 1, New York, NY 10001	US
+S1-00012	Summit Logistics LLC	361 Main Street, Suite 2, Austin, TX 78701	US
+S1-00013	Beacon Logistics LLC	398 Main Street, Suite 3, Seattle, WA 98101	US
+S1-00014	Pinnacle Logistics LLC	435 Main Street, Suite 4, Chicago, IL 60601	US
+S1-00015	Golden Logistics Pvt Ltd	Plot 472, MG Road, Near Metro Pillar 14, Bangalore 560001	India
+S1-00016	Silver Logistics Pvt Ltd	Plot 509, MG Road, Near Metro Pillar 15, Mumbai 400001	India
+S1-00017	Emerald Logistics Pvt Ltd	Plot 546, MG Road, Near Metro Pillar 16, Delhi 110001	India
+S1-00018	Blue Ridge Logistics Pvt Ltd	Plot 583, MG Road, Near Metro Pillar 17, Hyderabad 500001	India
+S1-00019	Pacific Logistics SARL	620 Rue de la Paix, 75001 Paris	France
+S1-00020	Atlantic Logistics SARL	657 Rue de la Paix, 69001 Lyon	France
+S1-00021	Metro Logistics LLC	694 Main Street, Suite 11, Seattle, WA 98101	US
+S1-00022	Royal Logistics LLC	731 Main Street, Suite 12, Chicago, IL 60601	US
+S1-00023	Imperial Logistics LLC	768 Main Street, Suite 13, New York, NY 10001	US
+S1-00024	Horizon Logistics LLC	805 Main Street, Suite 14, Austin, TX 78701	US
+S1-00025	Vanguard Logistics Pvt Ltd	Plot 842, MG Road, Near Metro Pillar 24, Delhi 110001	India
+S1-00026	Zenith Logistics Pvt Ltd	Plot 879, MG Road, Near Metro Pillar 25, Hyderabad 500001	India
+S1-00027	Sunrise Logistics Pvt Ltd	Plot 916, MG Road, Near Metro Pillar 26, Bangalore 560001	India
+S1-00028	Evergreen Logistics Pvt Ltd	Plot 953, MG Road, Near Metro Pillar 27, Mumbai 400001	India
+S1-00029	Cascade Logistics SARL	990 Rue de la Paix, 13001 Marseille	France
+S1-00030	Crest Logistics SARL	28 Rue de la Paix, 33000 Bordeaux	France
+S1-00031	Apex Bakery LLC	65 Main Street, Suite 1, New York, NY 10001	US
+S1-00032	Summit Bakery LLC	102 Main Street, Suite 2, Austin, TX 78701	US
+S1-00033	Beacon Bakery LLC	139 Main Street, Suite 3, Seattle, WA 98101	US
+S1-00034	Pinnacle Bakery LLC	176 Main Street, Suite 4, Chicago, IL 60601	US
+S1-00035	Golden Bakery Pvt Ltd	Plot 213, MG Road, Near Metro Pillar 34, Bangalore 560001	India
+S1-00036	Silver Bakery Pvt Ltd	Plot 250, MG Road, Near Metro Pillar 35, Mumbai 400001	India
+S1-00037	Emerald Bakery Pvt Ltd	Plot 287, MG Road, Near Metro Pillar 36, Delhi 110001	India
+S1-00038	Blue Ridge Bakery Pvt Ltd	Plot 324, MG Road, Near Metro Pillar 37, Hyderabad 500001	India
+S1-00039	Pacific Bakery SARL	361 Rue de la Paix, 75001 Paris	France
+S1-00040	Atlantic Bakery SARL	398 Rue de la Paix, 69001 Lyon	France
+S1-00041	Metro Bakery LLC	435 Main Street, Suite 11, Seattle, WA 98101	US
+S1-00042	Royal Bakery LLC	472 Main Street, Suite 12, Chicago, IL 60601	US
+S1-00043	Imperial Bakery LLC	509 Main Street, Suite 13, New York, NY 10001	US
+S1-00044	Horizon Bakery LLC	546 Main Street, Suite 14, Austin, TX 78701	US
+S1-00045	Vanguard Bakery Pvt Ltd	Plot 583, MG Road, Near Metro Pillar 44, Delhi 110001	India
+S1-00046	Zenith Bakery Pvt Ltd	Plot 620, MG Road, Near Metro Pillar 45, Hyderabad 500001	India
+S1-00047	Sunrise Bakery Pvt Ltd	Plot 657, MG Road, Near Metro Pillar 46, Bangalore 560001	India
+S1-00048	Evergreen Bakery Pvt Ltd	Plot 694, MG Road, Near Metro Pillar 47, Mumbai 400001	India
+S1-00049	Cascade Bakery SARL	731 Rue de la Paix, 13001 Marseille	France
+S1-00050	Crest Bakery SARL	768 Rue de la Paix, 33000 Bordeaux	France
+S1-00051	Apex Cafe & Bistro LLC	805 Main Street, Suite 1, New York, NY 10001	US
+S1-00052	Summit Cafe & Bistro LLC	842 Main Street, Suite 2, Austin, TX 78701	US
+S1-00053	Beacon Cafe & Bistro LLC	879 Main Street, Suite 3, Seattle, WA 98101	US
+S1-00054	Pinnacle Cafe & Bistro LLC	916 Main Street, Suite 4, Chicago, IL 60601	US
+S1-00055	Golden Cafe & Bistro Pvt Ltd	Plot 953, MG Road, Near Metro Pillar 4, Bangalore 560001	India
+S1-00056	Silver Cafe & Bistro Pvt Ltd	Plot 990, MG Road, Near Metro Pillar 5, Mumbai 400001	India
+S1-00057	Emerald Cafe & Bistro Pvt Ltd	Plot 28, MG Road, Near Metro Pillar 6, Delhi 110001	India
+S1-00058	Blue Ridge Cafe & Bistro Pvt Ltd	Plot 65, MG Road, Near Metro Pillar 7, Hyderabad 500001	India
+S1-00059	Pacific Cafe & Bistro SARL	102 Rue de la Paix, 75001 Paris	France
+S1-00060	Atlantic Cafe & Bistro SARL	139 Rue de la Paix, 69001 Lyon	France
+S1-00061	Metro Cafe & Bistro LLC	176 Main Street, Suite 11, Seattle, WA 98101	US
+S1-00062	Royal Cafe & Bistro LLC	213 Main Street, Suite 12, Chicago, IL 60601	US
+S1-00063	Imperial Cafe & Bistro LLC	250 Main Street, Suite 13, New York, NY 10001	US
+S1-00064	Horizon Cafe & Bistro LLC	287 Main Street, Suite 14, Austin, TX 78701	US
+S1-00065	Vanguard Cafe & Bistro Pvt Ltd	Plot 324, MG Road, Near Metro Pillar 14, Delhi 110001	India
+S1-00066	Zenith Cafe & Bistro Pvt Ltd	Plot 361, MG Road, Near Metro Pillar 15, Hyderabad 500001	India
+S1-00067	Sunrise Cafe & Bistro Pvt Ltd	Plot 398, MG Road, Near Metro Pillar 16, Bangalore 560001	India
+S1-00068	Evergreen Cafe & Bistro Pvt Ltd	Plot 435, MG Road, Near Metro Pillar 17, Mumbai 400001	India
+S1-00069	Cascade Cafe & Bistro SARL	472 Rue de la Paix, 13001 Marseille	France
+S1-00070	Crest Cafe & Bistro SARL	509 Rue de la Paix, 33000 Bordeaux	France
+S1-00071	Apex Textiles LLC	546 Main Street, Suite 1, New York, NY 10001	US
+S1-00072	Summit Textiles LLC	583 Main Street, Suite 2, Austin, TX 78701	US
+S1-00073	Beacon Textiles LLC	620 Main Street, Suite 3, Seattle, WA 98101	US
+S1-00074	Pinnacle Textiles LLC	657 Main Street, Suite 4, Chicago, IL 60601	US
+S1-00075	Golden Textiles Pvt Ltd	Plot 694, MG Road, Near Metro Pillar 24, Bangalore 560001	India
+S1-00076	Silver Textiles Pvt Ltd	Plot 731, MG Road, Near Metro Pillar 25, Mumbai 400001	India
+S1-00077	Emerald Textiles Pvt Ltd	Plot 768, MG Road, Near Metro Pillar 26, Delhi 110001	India
+S1-00078	Blue Ridge Textiles Pvt Ltd	Plot 805, MG Road, Near Metro Pillar 27, Hyderabad 500001	India
+S1-00079	Pacific Textiles SARL	842 Rue de la Paix, 75001 Paris	France
+S1-00080	Atlantic Textiles SARL	879 Rue de la Paix, 69001 Lyon	France
+S1-00081	Metro Textiles LLC	916 Main Street, Suite 11, Seattle, WA 98101	US
+S1-00082	Royal Textiles LLC	953 Main Street, Suite 12, Chicago, IL 60601	US
+S1-00083	Imperial Textiles LLC	990 Main Street, Suite 13, New York, NY 10001	US
+S1-00084	Horizon Textiles LLC	28 Main Street, Suite 14, Austin, TX 78701	US
