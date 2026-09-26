@@ -1,0 +1,6 @@
+experiment_id,random_seed,features,model_type,calibrated,hard_negatives,decision_logic,optimal_threshold,precision,recall,macro_f05,singleton_f05,non_singleton_f05,total_predicted_matches,training_pairs,runtime_sec
+EXP-01-BASELINE,42,29_baseline,LightGBM,False,False,fixed_threshold,0.5,0.9073,0.7042,0.8313,0.9265,0.8268,3655,62713,12.03
+EXP-01-BASELINE,42,29_baseline,LightGBM,False,False,fixed_threshold,0.48,0.9073,0.7028,0.8304,0.8971,0.8272,3648,62713,13.37
+EXP-02-IMPROVED,42,34_extended,LightGBM,Isotonic,True,calibrated_margin,0.72,0.9092,0.703,0.8318,0.9118,0.828,3635,64992,12.66
+EXP-01-BASELINE,42,29_baseline,LightGBM,False,False,fixed_threshold,0.68,0.9697,0.8611,0.9329,0.9559,0.9318,4519,56975,12.66
+EXP-02-IMPROVED,42,34_extended,LightGBM,Isotonic,True,calibrated_margin,0.72,0.9712,0.8621,0.9342,0.9559,0.9332,4520,66828,13.87

@@ -1,0 +1,96 @@
+{
+  "total_unique_street_keys": 503670,
+  "total_postings": 616364,
+  "avg_entities_per_key": 1.22,
+  "median_entities_per_key": 1.0,
+  "p90_entities_per_key": 2.0,
+  "p95_entities_per_key": 2.0,
+  "p99_entities_per_key": 5.0,
+  "max_entities_per_key": 139,
+  "singleton_keys_count": 450511,
+  "singleton_keys_pct": 89.45,
+  "keys_with_50_plus_entities": 35,
+  "keys_with_100_plus_entities": 2,
+  "top_20_collision_heavy_keys": [
+    {
+      "key": "1_plot",
+      "entity_count": 139
+    },
+    {
+      "key": "1_delhi",
+      "entity_count": 115
+    },
+    {
+      "key": "2_delhi",
+      "entity_count": 96
+    },
+    {
+      "key": "2_plot",
+      "entity_count": 90
+    },
+    {
+      "key": "3_plot",
+      "entity_count": 86
+    },
+    {
+      "key": "4_plot",
+      "entity_count": 84
+    },
+    {
+      "key": "24_north",
+      "entity_count": 81
+    },
+    {
+      "key": "4_delhi",
+      "entity_count": 76
+    },
+    {
+      "key": "10_delhi",
+      "entity_count": 70
+    },
+    {
+      "key": "1_flat",
+      "entity_count": 70
+    },
+    {
+      "key": "3_delhi",
+      "entity_count": 69
+    },
+    {
+      "key": "8_delhi",
+      "entity_count": 68
+    },
+    {
+      "key": "5_plot",
+      "entity_count": 66
+    },
+    {
+      "key": "7_delhi",
+      "entity_count": 64
+    },
+    {
+      "key": "5_delhi",
+      "entity_count": 64
+    },
+    {
+      "key": "16_delhi",
+      "entity_count": 63
+    },
+    {
+      "key": "1_unit",
+      "entity_count": 63
+    },
+    {
+      "key": "6_plot",
+      "entity_count": 62
+    },
+    {
+      "key": "24_parganas",
+      "entity_count": 62
+    },
+    {
+      "key": "13_delhi",
+      "entity_count": 62
+    }
+  ]
+}

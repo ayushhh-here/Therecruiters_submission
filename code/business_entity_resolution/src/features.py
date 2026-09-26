@@ -4,45 +4,51 @@
 # Module: src/features.py
 #
 # Description:
-#   High-Dimensional Pairwise Feature Engineering Engine.
-#   Implements the feature groups defined in Section 6 of the practical guide:
+#   High-Dimensional Multilingual Pairwise Feature Engineering Engine.
+#   Implements Phase 8 requirements:
 #     1. Business Name Features:
-#        - Normalized exact match (binary)
-#        - Core name exact match (without legal suffixes)
-#        - Token Jaccard similarity (word set overlap)
-#        - Character trigram Jaccard similarity (sub-word typo tolerance)
-#        - Levenshtein / Normalized Edit Distance similarity
-#        - Token count difference and string length ratio
+#        - Exact normalized match, core name match, sorted match
+#        - Transliterated / accent-invariant match
+#        - Token Jaccard similarity & character trigram Jaccard
+#        - C-accelerated Levenshtein similarity (RapidFuzz)
+#        - Token count difference, string length ratio
+#        - Name frequency / rarity penalty (downweights common names like 'CC')
 #     2. Business Address Features:
-#        - Normalized exact address match
-#        - Address token Jaccard similarity
-#        - Address character trigram Jaccard similarity
-#        - Numeric token overlap (house numbers, unit numbers)
-#        - Postal / PIN code match signal (1 = match, -1 = mismatch, 0 = missing)
+#        - Exact address match, token Jaccard, character trigram Jaccard
+#        - Numeric token overlap (house numbers, suite numbers)
+#        - Postal code signal (+1 match, -1 mismatch, 0 missing)
+#        - Missing address indicators (handles ~3% null target addresses)
 #        - Address length ratio
-#     3. Open-Set Country Features:
-#        - Strict country equality (1.0 = equal, 0.0 = different)
-#        - Missing country indicators (handles open-set French and unseen records)
+#     3. Script & Open-Set Country Features:
+#        - Strict country equality & unknown indicators
+#        - Primary script concordance (e.g. Devanagari == Devanagari)
 #     4. Cross-Field Non-Linear Interaction Signals:
-#        - Name strong + address weak (e.g., chain franchise with different locations)
-#        - Address strong + name weak (e.g., typo or rebranding at exact same premise)
-#        - Both name and address strong (strongest match signal)
-#        - Shared informative token count
-#     5. Candidate Metadata Features:
-#        - Total number of blocking rules that retrieved the pair
-#        - Individual blocking rule flags (exact, sorted, postal, token, trigram)
-#        - Candidate rank index within the query entity's candidate pool
+#        - Strong name + weak address (detects chain franchises)
+#        - Strong address + weak name (detects corporate renames / typos)
+#        - Both strong match
+#        - Shared informative token counts
+#     5. Candidate Metadata & Retrieval Priority Signals:
+#        - Rule agreement counts, individual rule triggers
+#        - Retrieval rank within query candidate pool
+#        - Retrieval priority score
 # ==============================================================================
 
-# Standard library imports
 import math
 from typing import Dict, List, Set, Tuple, Any, Optional
 
-# Import normalized record representation
-from src.normalization import NormalizedRecord
+from src.normalization import (
+    NormalizedRecord,
+    generate_char_ngrams,
+    normalize_unicode_and_case,
+    remove_punctuation_unicode,
+    transliterate_latin_accents,
+    extract_postal_code,
+    extract_numeric_tokens,
+    isolate_legal_suffixes,
+    normalize_country
+)
 
-# Attempt to import RapidFuzz for high-speed C-optimized Levenshtein calculations.
-# If unavailable, fall back to pure-Python dynamic programming to guarantee zero-crash execution.
+# RapidFuzz C-extension for high-speed Levenshtein calculations
 try:
     from rapidfuzz.distance import Levenshtein as rapid_levenshtein
     HAS_RAPIDFUZZ = True
@@ -51,20 +57,11 @@ except ImportError:
 
 
 # ==============================================================================
-# 1. MATHEMATICAL & STRING SIMILARITY PRIMITIVES
+# 1. STRING SIMILARITY PRIMITIVES
 # ==============================================================================
 
 def jaccard_similarity(set_a: Set[Any], set_b: Set[Any]) -> float:
-    """
-    Computes the Jaccard similarity index: |A ∩ B| / |A ∪ B|.
-    
-    Args:
-        set_a (Set): First set of tokens or n-grams.
-        set_b (Set): Second set of tokens or n-grams.
-        
-    Returns:
-        float: Similarity between 0.0 (disjoint) and 1.0 (identical sets).
-    """
+    """Computes Jaccard similarity: |A ∩ B| / |A ∪ B|."""
     if not set_a and not set_b:
         return 0.0
     intersection_len = len(set_a & set_b)
@@ -74,96 +71,44 @@ def jaccard_similarity(set_a: Set[Any], set_b: Set[Any]) -> float:
     return intersection_len / union_len
 
 
-def pure_python_levenshtein_distance(s1: str, s2: str) -> int:
-    """
-    Computes Levenshtein edit distance using dynamic programming with O(min(N, M)) space.
-    Used as an unshakeable fallback when rapidfuzz is not installed.
-    
-    Args:
-        s1 (str): First string.
-        s2 (str): Second string.
-        
-    Returns:
-        int: Minimum number of single-character edits (insertions, deletions, substitutions).
-    """
-    if s1 == s2:
-        return 0
-    if not s1:
-        return len(s2)
-    if not s2:
-        return len(s1)
-
-    # Ensure s1 is the shorter string to minimize space
-    if len(s1) > len(s2):
-        s1, s2 = s2, s1
-
-    previous_row = list(range(len(s1) + 1))
-    for i, c2 in enumerate(s2):
-        current_row = [i + 1]
-        for j, c1 in enumerate(s1):
-            insertions = previous_row[j + 1] + 1
-            deletions = current_row[j] + 1
-            substitutions = previous_row[j] + (c1 != c2)
-            current_row.append(min(insertions, deletions, substitutions))
-        previous_row = current_row
-
-    return previous_row[-1]
-
-
-def normalized_levenshtein_similarity(s1: str, s2: str) -> float:
-    """
-    Computes normalized string similarity based on Levenshtein distance:
-        similarity = 1.0 - (edit_distance / max(len(s1), len(s2)))
-        
-    Args:
-        s1 (str): First string.
-        s2 (str): Second string.
-        
-    Returns:
-        float: Similarity score between 0.0 and 1.0.
-    """
-    if not s1 and not s2:
-        return 0.0
+def fast_levenshtein_similarity(s1: str, s2: str) -> float:
+    """Computes normalized Levenshtein similarity in [0.0, 1.0]."""
     if s1 == s2:
         return 1.0
-        
+    if not s1 or not s2:
+        return 0.0
     max_len = max(len(s1), len(s2))
     if max_len == 0:
         return 0.0
 
     if HAS_RAPIDFUZZ:
         dist = rapid_levenshtein.distance(s1, s2)
-    else:
-        dist = pure_python_levenshtein_distance(s1, s2)
+        return max(0.0, 1.0 - (dist / max_len))
 
-    return max(0.0, 1.0 - (dist / max_len))
+    # Python fallback
+    if len(s1) > len(s2):
+        s1, s2 = s2, s1
+    prev = list(range(len(s1) + 1))
+    for i, c2 in enumerate(s2):
+        curr = [i + 1]
+        for j, c1 in enumerate(s1):
+            curr.append(min(prev[j + 1] + 1, curr[j] + 1, prev[j] + (c1 != c2)))
+        prev = curr
+    return max(0.0, 1.0 - (prev[-1] / max_len))
 
 
 def string_length_ratio(s1: str, s2: str) -> float:
-    """
-    Computes length ratio: min(len1, len2) / max(len1, len2).
-    
-    Args:
-        s1 (str): First string.
-        s2 (str): Second string.
-        
-    Returns:
-        float: Ratio between 0.0 and 1.0.
-    """
-    len1, len2 = len(s1), len(s2)
-    max_len = max(len1, len2)
-    if max_len == 0:
-        return 0.0
-    return min(len1, len2) / max_len
+    """Computes string length ratio: min(len1, len2) / max(len1, len2)."""
+    l1, l2 = len(s1), len(s2)
+    m = max(l1, l2)
+    return (min(l1, l2) / m) if m > 0 else 0.0
 
 
 # ==============================================================================
-# 2. FEATURE EXTRACTOR CLASS
+# 2. FEATURE DEFINITIONS
 # ==============================================================================
 
-# Explicit list of feature column names for documentation and model interpretability
-FEATURE_NAMES: List[str] = [
-    # --- Name Features ---
+BASELINE_FEATURE_NAMES: List[str] = [
     "feat_name_exact_match",
     "feat_name_core_exact_match",
     "feat_name_token_jaccard",
@@ -172,27 +117,19 @@ FEATURE_NAMES: List[str] = [
     "feat_name_token_count_diff",
     "feat_name_length_ratio",
     "feat_name_sorted_match",
-    
-    # --- Address Features ---
     "feat_addr_exact_match",
     "feat_addr_token_jaccard",
     "feat_addr_trigram_jaccard",
     "feat_addr_numeric_overlap",
     "feat_addr_postal_match",
     "feat_addr_length_ratio",
-    
-    # --- Country Features (Open-Set) ---
     "feat_country_exact_match",
     "feat_country_s1_unknown",
     "feat_country_target_unknown",
-    
-    # --- Cross-Field & Non-Linear Features ---
     "feat_cross_name_strong_addr_weak",
     "feat_cross_addr_strong_name_weak",
     "feat_cross_both_strong",
     "feat_cross_shared_informative_tokens",
-    
-    # --- Candidate Metadata Features ---
     "feat_meta_rule_count",
     "feat_meta_rule_exact_name",
     "feat_meta_rule_sorted_name",
@@ -203,77 +140,94 @@ FEATURE_NAMES: List[str] = [
     "feat_meta_candidate_rank"
 ]
 
+EXTENDED_FEATURE_NAMES: List[str] = list(BASELINE_FEATURE_NAMES) + [
+    "feat_name_translit_match",
+    "feat_addr_missing_indicator",
+    "feat_script_match",
+    "feat_meta_retrieval_score",
+    "feat_name_rarity_weight"
+]
+
+FEATURE_NAMES: List[str] = EXTENDED_FEATURE_NAMES
+
+
+# ==============================================================================
+# 3. FEATURE EXTRACTOR
+# ==============================================================================
 
 class FeatureExtractor:
-    """
-    Extracts dense numeric feature vectors for candidate entity pairs.
-    Precomputed properties on NormalizedRecord objects allow for ultra-fast calculation.
-    """
+    """Extracts dense numerical feature vectors for candidate entity pairs."""
 
     @staticmethod
     def extract_pairwise_features(
         s1: NormalizedRecord,
-        target: NormalizedRecord,
+        target_raw_name: str,
+        target_raw_address: str,
+        target_country: str,
         candidate_meta: Optional[Dict[str, Any]] = None,
-        candidate_rank: int = 0
+        candidate_rank: int = 0,
+        use_extended_features: bool = True
     ) -> List[float]:
         """
-        Extracts all pairwise features for a single (Source 1, Target) candidate pair.
-        
-        Args:
-            s1 (NormalizedRecord): Normalized Source 1 entity.
-            target (NormalizedRecord): Normalized Source 2 or Source 3 entity.
-            candidate_meta (dict, optional): Metadata from blocking stage.
-            candidate_rank (int): Rank of candidate in retrieval order (0-indexed).
-            
-        Returns:
-            List[float]: Numeric feature vector matching FEATURE_NAMES.
+        Extracts pairwise feature vector between Source 1 record and Target candidate.
         """
         if candidate_meta is None:
-            candidate_meta = {"rules": set(), "rule_count": 0, "token_overlap": 0}
+            candidate_meta = {"rules": set(), "rule_count": 0, "token_overlap": 0, "score": 0.0}
 
         rules = candidate_meta.get("rules", set())
+
+        # Target normalized attributes computed on the fly
+        t_norm_name = remove_punctuation_unicode(normalize_unicode_and_case(target_raw_name))
+        t_translit_name = transliterate_latin_accents(t_norm_name)
+        t_tokens = set(t_norm_name.split())
+        t_norm_addr = remove_punctuation_unicode(normalize_unicode_and_case(target_raw_address))
+        t_addr_tokens = set(t_norm_addr.split())
+        t_numeric = set(extract_numeric_tokens(t_norm_addr))
+        t_postal = extract_postal_code(target_raw_address)
+        t_country = normalize_country(target_country)
+
+        # Trigrams (computed only for candidate pair)
+        t_name_trigrams = generate_char_ngrams(t_norm_name, n=3)
+        t_addr_trigrams = generate_char_ngrams(t_norm_addr, n=3)
 
         # ----------------------------------------------------------------------
         # 1. Business Name Features
         # ----------------------------------------------------------------------
-        name_exact = 1.0 if (s1.norm_name and s1.norm_name == target.norm_name) else 0.0
-        name_core_exact = 1.0 if (s1.core_name and s1.core_name == target.core_name) else 0.0
-        name_sorted_exact = 1.0 if (s1.sorted_name_key and s1.sorted_name_key == target.sorted_name_key) else 0.0
+        name_exact = 1.0 if (s1.norm_name and s1.norm_name == t_norm_name) else 0.0
+        name_sorted = 1.0 if (s1.sorted_name_key and s1.sorted_name_key == " ".join(sorted(t_tokens))) else 0.0
 
-        name_tok_jaccard = jaccard_similarity(s1.name_tokens, target.name_tokens)
-        name_tri_jaccard = jaccard_similarity(s1.name_trigrams, target.name_trigrams)
-        name_lev_sim = normalized_levenshtein_similarity(s1.norm_name, target.norm_name)
+        # Core name match
+        t_core, _ = isolate_legal_suffixes(target_raw_name)
+        name_core = 1.0 if (s1.core_name and s1.core_name == t_core) else 0.0
 
-        name_tok_diff = float(abs(len(s1.name_tokens) - len(target.name_tokens)))
-        name_len_ratio = string_length_ratio(s1.norm_name, target.norm_name)
+        name_tok_jaccard = jaccard_similarity(s1.name_tokens, t_tokens)
+        name_tri_jaccard = jaccard_similarity(s1.name_trigrams, t_name_trigrams)
+        name_lev_sim = fast_levenshtein_similarity(s1.norm_name, t_norm_name)
+        name_tok_diff = float(abs(len(s1.name_tokens) - len(t_tokens)))
+        name_len_ratio = string_length_ratio(s1.norm_name, t_norm_name)
 
         # ----------------------------------------------------------------------
         # 2. Business Address Features
         # ----------------------------------------------------------------------
-        addr_exact = 1.0 if (s1.norm_address and s1.norm_address == target.norm_address) else 0.0
-        addr_tok_jaccard = jaccard_similarity(s1.address_tokens, target.address_tokens)
-        addr_tri_jaccard = jaccard_similarity(s1.address_trigrams, target.address_trigrams)
-        addr_num_overlap = jaccard_similarity(s1.numeric_tokens, target.numeric_tokens)
+        addr_missing = 1.0 if not t_norm_addr or not s1.norm_address else 0.0
+        addr_exact = 1.0 if (s1.norm_address and s1.norm_address == t_norm_addr) else 0.0
+        addr_tok_jaccard = jaccard_similarity(s1.address_tokens, t_addr_tokens) if not addr_missing else 0.0
+        addr_tri_jaccard = jaccard_similarity(s1.address_trigrams, t_addr_trigrams) if not addr_missing else 0.0
+        addr_num_overlap = jaccard_similarity(s1.numeric_tokens, t_numeric) if not addr_missing else 0.0
 
-        # Postal code signal:
-        # +1.0 = both non-empty and matching
-        # -1.0 = both non-empty but mismatching
-        #  0.0 = either missing
-        if s1.postal_code and target.postal_code:
-            postal_match = 1.0 if s1.postal_code == target.postal_code else -1.0
+        if s1.postal_code and t_postal:
+            postal_match = 1.0 if s1.postal_code == t_postal else -1.0
         else:
             postal_match = 0.0
 
-        addr_len_ratio = string_length_ratio(s1.norm_address, target.norm_address)
+        addr_len_ratio = string_length_ratio(s1.norm_address, t_norm_addr) if not addr_missing else 0.0
 
         # ----------------------------------------------------------------------
-        # 3. Open-Set Country Features
+        # 3. Country & Script Features
         # ----------------------------------------------------------------------
-        # Strictly compares strings without hard-coding {US, India}
-        country_exact = 1.0 if (s1.norm_country == target.norm_country and s1.norm_country != "UNKNOWN") else 0.0
+        country_exact = 1.0 if (s1.norm_country == t_country and s1.norm_country != "UNKNOWN") else 0.0
         country_s1_unk = 1.0 if s1.norm_country == "UNKNOWN" else 0.0
-        country_t_unk = 1.0 if target.norm_country == "UNKNOWN" else 0.0
+        country_t_unk = 1.0 if t_country == "UNKNOWN" else 0.0
 
         # ----------------------------------------------------------------------
         # 4. Cross-Field Non-Linear Features
@@ -281,7 +235,7 @@ class FeatureExtractor:
         cross_name_strong_addr_weak = 1.0 if (name_tok_jaccard >= 0.80 and addr_tok_jaccard <= 0.30) else 0.0
         cross_addr_strong_name_weak = 1.0 if (addr_tok_jaccard >= 0.80 and name_tok_jaccard <= 0.30) else 0.0
         cross_both_strong = 1.0 if (name_tok_jaccard >= 0.70 and addr_tok_jaccard >= 0.60) else 0.0
-        shared_tokens = float(len((s1.name_tokens | s1.address_tokens) & (target.name_tokens | target.address_tokens)))
+        shared_tokens = float(len((s1.name_tokens | s1.address_tokens) & (t_tokens | t_addr_tokens)))
 
         # ----------------------------------------------------------------------
         # 5. Candidate Metadata Features
@@ -295,16 +249,15 @@ class FeatureExtractor:
         r_trigram = 1.0 if "trigram_overlap" in rules else 0.0
         c_rank = float(candidate_rank)
 
-        # Assembled feature vector
-        return [
+        baseline_vector = [
             name_exact,
-            name_core_exact,
+            name_core,
             name_tok_jaccard,
             name_tri_jaccard,
             name_lev_sim,
             name_tok_diff,
             name_len_ratio,
-            name_sorted_exact,
+            name_sorted,
             addr_exact,
             addr_tok_jaccard,
             addr_tri_jaccard,
@@ -327,3 +280,33 @@ class FeatureExtractor:
             r_trigram,
             c_rank
         ]
+
+        if not use_extended_features:
+            return baseline_vector
+
+        # ----------------------------------------------------------------------
+        # 6. Extended Signals (Phase 8)
+        # ----------------------------------------------------------------------
+        # Transliterated equality (e.g. Marina École vs Marina Ecole)
+        name_translit = 1.0 if (s1.translit_name and s1.translit_name == t_translit_name) else 0.0
+
+        # Script match
+        from src.normalization import detect_primary_script
+        t_script = detect_primary_script(target_raw_name)
+        script_match = 1.0 if s1.primary_script == t_script else 0.0
+
+        # Retrieval score from candidate generator
+        retrieval_score = float(candidate_meta.get("score", 0.0))
+
+        # Name rarity penalty: very short names (< 4 chars, e.g. "CC", "PC", "LC") are low rarity
+        name_rarity = 1.0 if len(t_norm_name) >= 6 else (len(t_norm_name) / 6.0)
+
+        extended_vector = baseline_vector + [
+            name_translit,
+            addr_missing,
+            script_match,
+            retrieval_score,
+            name_rarity
+        ]
+
+        return extended_vector

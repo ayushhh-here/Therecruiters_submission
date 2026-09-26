@@ -1,0 +1,20 @@
+{
+  "total_queries": 1907,
+  "total_true_matches": 6930,
+  "recall_at_k": {
+    "Recall@1": 0.2571,
+    "Recall@5": 0.7986,
+    "Recall@10": 0.8655,
+    "Recall@20": 0.8848,
+    "Recall@50": 0.9001,
+    "Recall@100": 0.9081,
+    "Recall@200": 0.9173
+  },
+  "zero_candidate_pct": 0.0,
+  "mean_candidates_per_query": 147.12,
+  "median_candidates_per_query": 200.0,
+  "p90_candidates_per_query": 200.0,
+  "p95_candidates_per_query": 200.0,
+  "p99_candidates_per_query": 200.0,
+  "max_candidates_per_query": 200
+}

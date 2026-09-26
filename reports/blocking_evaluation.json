@@ -1,0 +1,33 @@
+{
+  "total_queries_evaluated": 1907,
+  "total_true_matches": 6930,
+  "recall_at_k": {
+    "Recall@1": 0.257,
+    "Recall@5": 0.7984,
+    "Recall@10": 0.8649,
+    "Recall@20": 0.883,
+    "Recall@50": 0.8978,
+    "Recall@100": 0.9059,
+    "Recall@200": 0.9149
+  },
+  "captured_counts_at_k": {
+    "1": 1781,
+    "5": 5533,
+    "10": 5994,
+    "20": 6119,
+    "50": 6222,
+    "100": 6278,
+    "200": 6340
+  },
+  "candidate_count_percentiles": {
+    "p50_median": 200.0,
+    "p90": 200.0,
+    "p95": 200.0,
+    "p99": 200.0,
+    "max": 200,
+    "mean": 147.12
+  },
+  "zero_candidate_query_pct": 0.0,
+  "mean_true_match_rank": 5.6,
+  "evaluation_time_sec": 28.13
+}

@@ -1,0 +1,103 @@
+==============================================================================
+       BUSINESS ENTITY RESOLUTION — REAL DATASET PROFILE REPORT
+==============================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TRAIN DATASETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [TRAIN SOURCE 1] (dataset\train\train_source1.tsv)
+    - File Size:            200.3 MB
+    - Total Records:    2,206,821
+    - Unique IDs:       2,206,821 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:            0 (0.00%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'India': 883188, 'US': 1323633}
+    - Name Lengths:    mean=24.03 chars, median=24.0, p95=37.0, max=105
+    - Addr Lengths:    mean=52.07 chars, median=41.0, p95=103.0, max=256
+    - Top Names:       Primary Care Group (253), Ear Nose & Throat Group (251), Pediatric Group (222), Womens Health Group (220), Physical Therapy Group (218)
+    - Unicode Scripts: {'LATIN_EXTENDED': 47}
+
+  [TRAIN SOURCE 2] (dataset\train\train_source2.tsv)
+    - File Size:            466.6 MB
+    - Total Records:    5,034,616
+    - Unique IDs:       5,034,616 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:      168,967 (3.36%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'India': 2017799, 'US': 3016817}
+    - Name Lengths:    mean=25.1 chars, median=25.0, p95=40.0, max=104
+    - Addr Lengths:    mean=46.23 chars, median=37.0, p95=96.0, max=249
+    - Top Names:       Primary Care (320), Physical Therapy (307), Urgent Care (297), Womens Health (297), Behavioral Health (296)
+    - Unicode Scripts: {'DEVANAGARI': 93275, 'TELUGU': 14518, 'KANNADA': 13983, 'TAMIL': 12409, 'BENGALI': 10877, 'GUJARATI': 10351, 'MALAYALAM': 6613, 'ORIYA': 3069, 'LATIN_EXTENDED': 3019, 'GURMUKHI': 1969, 'ZERO': 323}
+
+  [TRAIN SOURCE 3] (dataset\train\train_source3.tsv)
+    - File Size:            480.4 MB
+    - Total Records:    5,285,603
+    - Unique IDs:       5,285,603 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:      175,916 (3.33%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'US': 3170056, 'India': 2115547}
+    - Name Lengths:    mean=25.2 chars, median=25.0, p95=42.0, max=123
+    - Addr Lengths:    mean=46.71 chars, median=42.0, p95=91.0, max=240
+    - Top Names:       Primary Care (421), Physical Therapy (399), Pediatric Dental (393), Womens Health (379), Urgent Care (377)
+    - Unicode Scripts: {'DEVANAGARI': 58658, 'TAMIL': 8745, 'KANNADA': 8649, 'TELUGU': 8531, 'BENGALI': 6615, 'GUJARATI': 6012, 'MALAYALAM': 4214, 'LATIN_EXTENDED': 3216, 'ORIYA': 1839, 'GURMUKHI': 1579, 'ZERO': 164}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TEST DATASETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [TEST SOURCE 1] (dataset\test\test_source1.tsv)
+    - File Size:            166.9 MB
+    - Total Records:    1,732,544
+    - Unique IDs:       1,732,544 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:            0 (0.00%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'India': 809986, 'France': 259452, 'US': 663106}
+    - Name Lengths:    mean=23.84 chars, median=24.0, p95=36.0, max=92
+    - Addr Lengths:    mean=57.21 chars, median=50.0, p95=105.0, max=268
+    - Top Names:       Bordeaux Club SARL (205), Nantes Club SARL (157), Lille Club SARL (147), Urgent Care Group (123), Lille Club SAS (122)
+    - Unicode Scripts: {'LATIN_EXTENDED': 3794, 'RIGHT': 67}
+
+  [TEST SOURCE 2] (dataset\test\test_source2.tsv)
+    - File Size:            485.9 MB
+    - Total Records:    4,887,273
+    - Unique IDs:       4,887,273 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:      129,408 (2.65%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'US': 1871330, 'France': 703378, 'India': 2312565}
+    - Name Lengths:    mean=25.7 chars, median=25.0, p95=42.0, max=102
+    - Addr Lengths:    mean=50.41 chars, median=43.0, p95=99.0, max=269
+    - Top Names:       CC (302), PC (197), LC (194), AC (174), SC (174)
+    - Unicode Scripts: {'DEVANAGARI': 108384, 'TELUGU': 17685, 'KANNADA': 17383, 'TAMIL': 15849, 'BENGALI': 13915, 'GUJARATI': 12007, 'MALAYALAM': 9120, 'LATIN_EXTENDED': 6283, 'ORIYA': 3612, 'GURMUKHI': 2632, 'ZERO': 380, 'RIGHT': 67}
+
+  [TEST SOURCE 3] (dataset\test\test_source3.tsv)
+    - File Size:            482.6 MB
+    - Total Records:    5,082,316
+    - Unique IDs:       5,082,316 (Duplicates: 0)
+    - Missing Names:            0 (0.00%)
+    - Missing Addrs:      136,098 (2.68%)
+    - Missing Ctry:             0 (0.00%)
+    - Countries:       {'US': 1945701, 'India': 2405000, 'France': 731615}
+    - Name Lengths:    mean=25.66 chars, median=25.0, p95=42.0, max=103
+    - Addr Lengths:    mean=48.74 chars, median=43.0, p95=94.0, max=267
+    - Top Names:       CC (387), SC (358), AC (297), PC (286), LC (245)
+    - Unicode Scripts: {'DEVANAGARI': 72582, 'KANNADA': 10522, 'TAMIL': 10463, 'TELUGU': 10285, 'BENGALI': 9525, 'GUJARATI': 6885, 'LATIN_EXTENDED': 6442, 'MALAYALAM': 4668, 'ORIYA': 2134, 'GURMUKHI': 1930, 'ZERO': 222, 'RIGHT': 41}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GROUND TRUTH ASSOCIATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    - Total S1 Entities:      2,206,821
+    - Total True Matches:     7,638,365
+    - Singletons (0 match):     123,247 (5.58%)
+    - Non-Singletons:         2,083,574
+    - Origin Share:          Source 2: 48.4%, Source 3: 51.6%
+    - Matches / Entity:      mean=3.461, median=3.0, p90=6.0, p95=6.0, max=11
+    - Multiplicity Hist:     {0: 123247, 1: 119157, 2: 375212, 3: 530841, 4: 484115, 5: 321957, 6: 164868, 7: 63968, 8: 18680, 9: 4205, 10: 534, 11: 37}
+
+  Total Profiling Runtime: 19.75s
+==============================================================================

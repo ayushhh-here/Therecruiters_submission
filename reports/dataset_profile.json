@@ -1,0 +1,444 @@
+{
+  "train": {
+    "source1": {
+      "status": "loaded",
+      "label": "Train Source 1",
+      "filepath": "dataset\\train\\train_source1.tsv",
+      "file_size_mb": 200.34,
+      "total_rows": 2206821,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 2206821,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "India": 883188,
+        "US": 1323633
+      },
+      "empty_names": 0,
+      "empty_addresses": 0,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 0.0,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 3,
+        "max": 105,
+        "mean": 24.03,
+        "median": 24.0,
+        "p90": 34.0,
+        "p95": 37.0,
+        "p99": 42.0
+      },
+      "addr_length_stats": {
+        "min": 11,
+        "max": 256,
+        "mean": 52.07,
+        "median": 41.0,
+        "p90": 90.0,
+        "p95": 103.0,
+        "p99": 124.0
+      },
+      "top_frequent_names": [
+        "Primary Care Group (253)",
+        "Ear Nose & Throat Group (251)",
+        "Pediatric Group (222)",
+        "Womens Health Group (220)",
+        "Physical Therapy Group (218)",
+        "Pediatric Dental Group (216)",
+        "Behavioral Health Group (215)",
+        "Chiropractic Group (209)",
+        "Orthopedic Group (208)",
+        "Eye Group (207)"
+      ],
+      "unicode_script_distribution": {
+        "LATIN_EXTENDED": 47
+      },
+      "scan_time_sec": 1.21
+    },
+    "source2": {
+      "status": "loaded",
+      "label": "Train Source 2",
+      "filepath": "dataset\\train\\train_source2.tsv",
+      "file_size_mb": 466.63,
+      "total_rows": 5034616,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 5034616,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "India": 2017799,
+        "US": 3016817
+      },
+      "empty_names": 0,
+      "empty_addresses": 168967,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 3.356,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 2,
+        "max": 104,
+        "mean": 25.1,
+        "median": 25.0,
+        "p90": 37.0,
+        "p95": 40.0,
+        "p99": 48.0
+      },
+      "addr_length_stats": {
+        "min": 0,
+        "max": 249,
+        "mean": 46.23,
+        "median": 37.0,
+        "p90": 83.0,
+        "p95": 96.0,
+        "p99": 118.0
+      },
+      "top_frequent_names": [
+        "Primary Care (320)",
+        "Physical Therapy (307)",
+        "Urgent Care (297)",
+        "Womens Health (297)",
+        "Behavioral Health (296)",
+        "Internal Medicine (288)",
+        "Pediatric Dentistry (274)",
+        "earnosethroat.com (269)",
+        "Pediatric Dental (268)",
+        "Ear Nose & Throat (220)"
+      ],
+      "unicode_script_distribution": {
+        "DEVANAGARI": 93275,
+        "TELUGU": 14518,
+        "KANNADA": 13983,
+        "TAMIL": 12409,
+        "BENGALI": 10877,
+        "GUJARATI": 10351,
+        "MALAYALAM": 6613,
+        "ORIYA": 3069,
+        "LATIN_EXTENDED": 3019,
+        "GURMUKHI": 1969,
+        "ZERO": 323
+      },
+      "scan_time_sec": 2.93
+    },
+    "source3": {
+      "status": "loaded",
+      "label": "Train Source 3",
+      "filepath": "dataset\\train\\train_source3.tsv",
+      "file_size_mb": 480.37,
+      "total_rows": 5285603,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 5285603,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "US": 3170056,
+        "India": 2115547
+      },
+      "empty_names": 0,
+      "empty_addresses": 175916,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 3.328,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 2,
+        "max": 123,
+        "mean": 25.2,
+        "median": 25.0,
+        "p90": 37.0,
+        "p95": 42.0,
+        "p99": 50.0
+      },
+      "addr_length_stats": {
+        "min": 0,
+        "max": 240,
+        "mean": 46.71,
+        "median": 42.0,
+        "p90": 77.0,
+        "p95": 91.0,
+        "p99": 115.0
+      },
+      "top_frequent_names": [
+        "Primary Care (421)",
+        "Physical Therapy (399)",
+        "Pediatric Dental (393)",
+        "Womens Health (379)",
+        "Urgent Care (377)",
+        "Pediatric Dentistry (361)",
+        "Behavioral Health (330)",
+        "Pediatric (321)",
+        "Internal Medicine (319)",
+        "The Dent (254)"
+      ],
+      "unicode_script_distribution": {
+        "DEVANAGARI": 58658,
+        "TAMIL": 8745,
+        "KANNADA": 8649,
+        "TELUGU": 8531,
+        "BENGALI": 6615,
+        "GUJARATI": 6012,
+        "MALAYALAM": 4214,
+        "LATIN_EXTENDED": 3216,
+        "ORIYA": 1839,
+        "GURMUKHI": 1579,
+        "ZERO": 164
+      },
+      "scan_time_sec": 3.76
+    }
+  },
+  "test": {
+    "source1": {
+      "status": "loaded",
+      "label": "Test Source 1",
+      "filepath": "dataset\\test\\test_source1.tsv",
+      "file_size_mb": 166.91,
+      "total_rows": 1732544,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 1732544,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "India": 809986,
+        "France": 259452,
+        "US": 663106
+      },
+      "empty_names": 0,
+      "empty_addresses": 0,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 0.0,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 3,
+        "max": 92,
+        "mean": 23.84,
+        "median": 24.0,
+        "p90": 34.0,
+        "p95": 36.0,
+        "p99": 42.0
+      },
+      "addr_length_stats": {
+        "min": 11,
+        "max": 268,
+        "mean": 57.21,
+        "median": 50.0,
+        "p90": 93.0,
+        "p95": 105.0,
+        "p99": 126.0
+      },
+      "top_frequent_names": [
+        "Bordeaux Club SARL (205)",
+        "Nantes Club SARL (157)",
+        "Lille Club SARL (147)",
+        "Urgent Care Group (123)",
+        "Lille Club SAS (122)",
+        "Bordeaux Club SAS (118)",
+        "Nantes Club SAS (117)",
+        "Bordeaux Amicale SARL (116)",
+        "Ear Nose & Throat Group (112)",
+        "Internal Medicine Group (111)"
+      ],
+      "unicode_script_distribution": {
+        "LATIN_EXTENDED": 3794,
+        "RIGHT": 67
+      },
+      "scan_time_sec": 1.46
+    },
+    "source2": {
+      "status": "loaded",
+      "label": "Test Source 2",
+      "filepath": "dataset\\test\\test_source2.tsv",
+      "file_size_mb": 485.86,
+      "total_rows": 4887273,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 4887273,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "US": 1871330,
+        "France": 703378,
+        "India": 2312565
+      },
+      "empty_names": 0,
+      "empty_addresses": 129408,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 2.648,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 2,
+        "max": 102,
+        "mean": 25.7,
+        "median": 25.0,
+        "p90": 38.0,
+        "p95": 42.0,
+        "p99": 49.0
+      },
+      "addr_length_stats": {
+        "min": 0,
+        "max": 269,
+        "mean": 50.41,
+        "median": 43.0,
+        "p90": 87.0,
+        "p95": 99.0,
+        "p99": 120.0
+      },
+      "top_frequent_names": [
+        "CC (302)",
+        "PC (197)",
+        "LC (194)",
+        "AC (174)",
+        "SC (174)",
+        "DC (159)",
+        "Urgent Care (156)",
+        "Womens Health (152)",
+        "BC (148)",
+        "MC (147)"
+      ],
+      "unicode_script_distribution": {
+        "DEVANAGARI": 108384,
+        "TELUGU": 17685,
+        "KANNADA": 17383,
+        "TAMIL": 15849,
+        "BENGALI": 13915,
+        "GUJARATI": 12007,
+        "MALAYALAM": 9120,
+        "LATIN_EXTENDED": 6283,
+        "ORIYA": 3612,
+        "GURMUKHI": 2632,
+        "ZERO": 380,
+        "RIGHT": 67
+      },
+      "scan_time_sec": 4.55
+    },
+    "source3": {
+      "status": "loaded",
+      "label": "Test Source 3",
+      "filepath": "dataset\\test\\test_source3.tsv",
+      "file_size_mb": 482.56,
+      "total_rows": 5082316,
+      "columns": [
+        "entity_id",
+        "business_name",
+        "business_address",
+        "country"
+      ],
+      "unique_ids": 5082316,
+      "duplicate_ids": 0,
+      "country_distribution": {
+        "US": 1945701,
+        "India": 2405000,
+        "France": 731615
+      },
+      "empty_names": 0,
+      "empty_addresses": 136098,
+      "empty_countries": 0,
+      "empty_name_pct": 0.0,
+      "empty_addr_pct": 2.678,
+      "empty_country_pct": 0.0,
+      "name_length_stats": {
+        "min": 2,
+        "max": 103,
+        "mean": 25.66,
+        "median": 25.0,
+        "p90": 38.0,
+        "p95": 42.0,
+        "p99": 50.0
+      },
+      "addr_length_stats": {
+        "min": 0,
+        "max": 267,
+        "mean": 48.74,
+        "median": 43.0,
+        "p90": 81.0,
+        "p95": 94.0,
+        "p99": 117.0
+      },
+      "top_frequent_names": [
+        "CC (387)",
+        "SC (358)",
+        "AC (297)",
+        "PC (286)",
+        "LC (245)",
+        "MC (243)",
+        "BC (226)",
+        "CS (218)",
+        "Internal Medicine (214)",
+        "DC (213)"
+      ],
+      "unicode_script_distribution": {
+        "DEVANAGARI": 72582,
+        "KANNADA": 10522,
+        "TAMIL": 10463,
+        "TELUGU": 10285,
+        "BENGALI": 9525,
+        "GUJARATI": 6885,
+        "LATIN_EXTENDED": 6442,
+        "MALAYALAM": 4668,
+        "ORIYA": 2134,
+        "GURMUKHI": 1930,
+        "ZERO": 222,
+        "RIGHT": 41
+      },
+      "scan_time_sec": 4.7
+    }
+  },
+  "ground_truth": {
+    "status": "loaded",
+    "filepath": "dataset\\train\\train_ground_truth.tsv",
+    "file_size_mb": 121.13,
+    "total_s1_records": 2206821,
+    "unique_s1_ids": 2206821,
+    "total_true_matches": 7638365,
+    "singleton_count": 123247,
+    "singleton_pct": 5.585,
+    "non_singleton_count": 2083574,
+    "match_count_stats": {
+      "min": 0,
+      "max": 11,
+      "mean": 3.461,
+      "median": 3.0,
+      "p90": 6.0,
+      "p95": 6.0,
+      "p99": 8.0
+    },
+    "match_cardinality_histogram": {
+      "0": 123247,
+      "1": 119157,
+      "2": 375212,
+      "3": 530841,
+      "4": 484115,
+      "5": 321957,
+      "6": 164868,
+      "7": 63968,
+      "8": 18680,
+      "9": 4205,
+      "10": 534,
+      "11": 37
+    },
+    "source2_share_pct": 48.4,
+    "source3_share_pct": 51.6,
+    "scan_time_sec": 1.11
+  },
+  "total_execution_time_sec": 19.75
+}

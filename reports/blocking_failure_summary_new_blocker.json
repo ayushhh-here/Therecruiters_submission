@@ -1,0 +1,16 @@
+{
+  "total_positive_pairs": 6930,
+  "total_unretrieved_at_200": 573,
+  "unretrieved_pct": 8.27,
+  "failure_counts": {
+    "script_mismatch_no_shared_address": 197,
+    "all_informative_tokens_frequency_capped": 113,
+    "low_retrieval_score_outranked": 79,
+    "fuzzy_spelling_variation": 55,
+    "different_business_name_same_address": 45,
+    "missing_address": 42,
+    "severe_name_and_address_divergence": 36,
+    "acronym_or_abbreviation": 4,
+    "shared_tokens_are_stop_words": 2
+  }
+}

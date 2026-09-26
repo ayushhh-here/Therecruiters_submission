@@ -1,0 +1,325 @@
+{
+  "total_positive_pairs": 6930,
+  "rank_brackets": {
+    "rank_lte_1": 1609,
+    "rank_lte_5": 4530,
+    "rank_lte_10": 4836,
+    "rank_lte_20": 4955,
+    "rank_lte_50": 5162,
+    "rank_lte_100": 5390,
+    "rank_lte_200": 5491,
+    "rank_gt_200": 44,
+    "not_retrieved": 1395
+  },
+  "percentiles": {
+    "p50": 2.0,
+    "p75": 4.0,
+    "p90": 24.600000000000364,
+    "p95": 72.0,
+    "p99": 180.3199999999997
+  },
+  "failure_counts": {
+    "candidate_cap_exceeded (50 < rank <= 200)": 329,
+    "token_frequency_capped (> 400 records)": 359,
+    "script_mismatch": 471,
+    "severe_name_divergence / synonym": 166,
+    "fuzzy_spelling_variation (no exact token)": 195,
+    "low_retrieval_priority_score": 143,
+    "missing_address": 29,
+    "acronym_or_short_code": 23,
+    "candidate_cap_exceeded (rank > 200)": 44,
+    "shared_tokens_are_generic_stop_tokens": 9
+  },
+  "failure_samples": {
+    "candidate_cap_exceeded (50 < rank <= 200)": [
+      {
+        "s1_id": "S1-250284344",
+        "s1_name": "Fortune Developers Private Limited",
+        "s1_addr": "Punjab, C/O Sukhjiwan Kumar So Dharam Pal Bansal Mc No.585/12, Moga, Opp. Axis Bank, Mudki Road, Baghapurana",
+        "target_id": "S3-801025607",
+        "t_name": "Fortune Private Limited-Service",
+        "t_addr": "C/o Sukhjiwan Kumar So Dharam Pal Bansal Mc No.585/12, Baghapurana, Moga, PB",
+        "rank": 76
+      },
+      {
+        "s1_id": "S1-972094780",
+        "s1_name": "Wynn Companies",
+        "s1_addr": "5600 Chehalis Place, Blaine, WA",
+        "target_id": "S2-835554507",
+        "t_name": "WYNN  COMPNLATES",
+        "t_addr": "5600 CHEHALIS PL, BLAINE, WA",
+        "rank": 138
+      },
+      {
+        "s1_id": "S1-834658678",
+        "s1_name": "Sbn Ahmedabad Pvt Ltd",
+        "s1_addr": "Unit 704 7Th Floor Premises No. 02-0124, Action Area 1B, New Town, North 24 Parganas, West Bengal",
+        "target_id": "S2-104164661",
+        "t_name": "@sbnahmedabad",
+        "t_addr": "UNIT 704 7TH FLOOR PREMISES NO. 02-0124, ACTION AREA 1B, NEW TOWN, West Bengal",
+        "rank": 98
+      }
+    ],
+    "token_frequency_capped (> 400 records)": [
+      {
+        "s1_id": "S1-806019560",
+        "s1_name": "Innovative Value Mfa",
+        "s1_addr": "318 Grant Street, Unit F, Spencer, NC",
+        "target_id": "S3-157729624",
+        "t_name": "Innovative Value",
+        "t_addr": "##318 Grant St, Unit F, Spencer, North Carolina",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-806019560",
+        "s1_name": "Innovative Value Mfa",
+        "s1_addr": "318 Grant Street, Unit F, Spencer, NC",
+        "target_id": "S3-650785909",
+        "t_name": "Innovative Value Services",
+        "t_addr": "##318 Grant St, Unit F, Spencer, North Carolina",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-989983023",
+        "s1_name": "Eye Partners of Brookline",
+        "s1_addr": "119 Winthrop Road, Unit 2D, Brookline, MA",
+        "target_id": "S2-933438603",
+        "t_name": "Eye  Partners",
+        "t_addr": "119 WINTHROP RD, BROOKLINE, MA",
+        "rank": -1
+      }
+    ],
+    "script_mismatch": [
+      {
+        "s1_id": "S1-580569047",
+        "s1_name": "One Logistics",
+        "s1_addr": "1-J/15-A Khirki Extn., New Delhi, Delhi",
+        "target_id": "S2-631195208",
+        "t_name": "\u0935\u0928 \u0932\u0949\u091c\u093f\u0938\u094d\u091f\u093f\u0915\u094d\u0938",
+        "t_addr": "001-J/15-A KHIRKI EXTN., SOUTH DELHI, NEW DELHI, Delhi",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-874938230",
+        "s1_name": "Digital Infotech Private Limited",
+        "s1_addr": "Arji No 24 Ramepur, Varanasi, Uttar Pradesh",
+        "target_id": "S3-204768863",
+        "t_name": "\u0921\u093f\u091c\u093f\u091f\u0932 \u0907\u0902\u092b\u094b\u091f\u0947\u0915 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "t_addr": "Arji No 24 Ramepur, Varanasi, UP",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-46319724",
+        "s1_name": "Golden Media Private Limited",
+        "s1_addr": "Bangalore, Karnataka, Bangalore, 301, Daffodil, Esteem Gardenia, Sahakarnagar E Block",
+        "target_id": "S2-509981557",
+        "t_name": "\u0c97\u0ccb\u0cb2\u0ccd\u0ca1\u0ca8\u0ccd \u0cae\u0cc0\u0ca1\u0cbf\u0caf\u0cbe \u0caa\u0ccd\u0cb0\u0cc8\u0cb5\u0cc7\u0c9f\u0ccd \u0cb2\u0cbf\u0cae\u0cbf\u0c9f\u0cc6\u0ca1\u0ccd",
+        "t_addr": "301, DAFFODIL, ESTEEM GARDENIA, SAHAKARNAGAR E BLOCK, BANGALORE, \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95",
+        "rank": -1
+      }
+    ],
+    "severe_name_divergence / synonym": [
+      {
+        "s1_id": "S1-580569047",
+        "s1_name": "One Logistics",
+        "s1_addr": "1-J/15-A Khirki Extn., New Delhi, Delhi",
+        "target_id": "S3-381171307",
+        "t_name": "Sri Vantagearc",
+        "t_addr": "H.no 1-J/15-A Khirki Extn., New Delhi, DL",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-685340600",
+        "s1_name": "Wallin Ace Sachem, Inc",
+        "s1_addr": "5 Ridge Road, Catonsville, MD",
+        "target_id": "S2-416426474",
+        "t_name": "awsachem.com",
+        "t_addr": "5 RIDGE ROAD, CATONSSVILLE, MD",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-637263411",
+        "s1_name": "Zircon Nursing Home",
+        "s1_addr": "House No.280, Kh. No. 6/25, Ground Floor Uttrakhand Enclave, Shastri Park Extn Ci, Ty, Burari, New Delhi, North Delhi, Delhi",
+        "target_id": "S2-144395263",
+        "t_name": "Brixnexkelo",
+        "t_addr": "HOUSE NO.280, KH. NO. 6/25, GROUND FLOOR UTTRAKHAND ENCLAVE, SHASTRI PARK EXTN CI, TY, BURARI, NORTH DELHI, NEW DELHI, Delhi",
+        "rank": -1
+      }
+    ],
+    "fuzzy_spelling_variation (no exact token)": [
+      {
+        "s1_id": "S1-874938230",
+        "s1_name": "Digital Infotech Private Limited",
+        "s1_addr": "Arji No 24 Ramepur, Varanasi, Uttar Pradesh",
+        "target_id": "S3-182480449",
+        "t_name": "infotechprivatedigital.com",
+        "t_addr": "Arji No 24 Ramepur, Varanasi, \u0909\u0924\u094d\u0924\u0930 \u092a\u094d\u0930\u0926\u0947\u0936",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-874938230",
+        "s1_name": "Digital Infotech Private Limited",
+        "s1_addr": "Arji No 24 Ramepur, Varanasi, Uttar Pradesh",
+        "target_id": "S3-861956423",
+        "t_name": "DigitalinfotechCom",
+        "t_addr": "Varanasi, UP, Varanasi, Arji No 24 Ramepur",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-719195579",
+        "s1_name": "Diamond & Brothers LLP",
+        "s1_addr": "D.No: 1-69D, Uppumaguluru, Ongole, Prakasam, Andhra Pradesh",
+        "target_id": "S3-742500663",
+        "t_name": "diamondbrothers.com",
+        "t_addr": "D.no: 001-69D, Ongole, null, AP",
+        "rank": -1
+      }
+    ],
+    "low_retrieval_priority_score": [
+      {
+        "s1_id": "S1-989983023",
+        "s1_name": "Eye Partners of Brookline",
+        "s1_addr": "119 Winthrop Road, Unit 2D, Brookline, MA",
+        "target_id": "S2-898574917",
+        "t_name": "Eye Partners of",
+        "t_addr": "BROOKLINE, 119 WINTHROP RD, MA",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-938204915",
+        "s1_name": "Oncology Care Associates",
+        "s1_addr": "18 Old County Way, Portland, CT",
+        "target_id": "S3-11794201",
+        "t_name": "Oncology Care Associates Inc.",
+        "t_addr": "18 Old County Way, Portland, Connecticut",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-207718019",
+        "s1_name": "Ss Foundation LLP",
+        "s1_addr": "Dhanwatay Bldg Wing 3Rdfloor Plot No 80 Dr A B Rd Worli, Mumbai, Maharashtra",
+        "target_id": "S2-608399996",
+        "t_name": "Ss Fahfunadati0n LLP",
+        "t_addr": "H.NO C-804 DHANWATAY BLDG WING 3RDFLOOR PLOT NO 80 DR A B RD WORLI, MUMBAI, Maharashtra",
+        "rank": -1
+      }
+    ],
+    "missing_address": [
+      {
+        "s1_id": "S1-260442043",
+        "s1_name": "Urgent Care Group",
+        "s1_addr": "5111 Archdale Drive, Conover, NC",
+        "target_id": "S3-966146658",
+        "t_name": "Urgent-Gr0up Center",
+        "t_addr": null,
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-598483695",
+        "s1_name": "Ga Institute",
+        "s1_addr": "Flat No.203, Building No.A4 Aditya Shagun Phase Ii, Nda-Prashan Road, Bavdhan, Pune, Maharashtra",
+        "target_id": "S3-969146659",
+        "t_name": "Shri Ga Institute",
+        "t_addr": null,
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-694452119",
+        "s1_name": "Federal Hospital Inc",
+        "s1_addr": "Baltimore, MD, Unit APT C, 6422 Elray Drive",
+        "target_id": "S3-200747490",
+        "t_name": "Federal-Inc Service",
+        "t_addr": null,
+        "rank": -1
+      }
+    ],
+    "acronym_or_short_code": [
+      {
+        "s1_id": "S1-766381695",
+        "s1_name": "Cp Industries Group Pvt. Ltd.",
+        "s1_addr": "357/1B, Prince Anwar Shah Road, Kolkata, Howrah, West Bengal",
+        "target_id": "S3-841525552",
+        "t_name": "CIG",
+        "t_addr": "357/1B, Prince Anwar Shah Road, Kolkata, Howrah, West Bengal",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-789598294",
+        "s1_name": "VLP India Pvt Ltd",
+        "s1_addr": "Pune, 1St Floor, Prosperity Heights, Behind Naivedyam Hotel, Opp.Patil Plaza, Swargate, Maharashtra, Office No.201",
+        "target_id": "S3-399749065",
+        "t_name": "VI",
+        "t_addr": "Office No.201, 1St Floor, Prosperity Heights, Behind Naivedyam Hotel, Opp.Patil Plaza, Swargate, Pune, Maharashtra",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-171037412",
+        "s1_name": "Feo",
+        "s1_addr": "Edgewood, 619 Wingleaf Court, MD",
+        "target_id": "S3-128951607",
+        "t_name": "F\u00e9o",
+        "t_addr": "619 Wingleaf Court, Edgewood, Maryland",
+        "rank": -1
+      }
+    ],
+    "candidate_cap_exceeded (rank > 200)": [
+      {
+        "s1_id": "S1-23332681",
+        "s1_name": "Good Estate Private Limited",
+        "s1_addr": "Flat 1401 Floor 13, Gemini Gardenia, Taramandal, Gorakhpur, Uttar Pradesh",
+        "target_id": "S3-405105075",
+        "t_name": "\u0917\u0941\u0921 Estate \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "t_addr": "Flat 7401 Floor 13, Gemini Gardenia, Taramandal, Gorakhpur, UP",
+        "rank": 301
+      },
+      {
+        "s1_id": "S1-617597271",
+        "s1_name": "Interfaith Guild LLC",
+        "s1_addr": "60 Prestonfield Drive, Southern Pines, NC",
+        "target_id": "S3-10294578",
+        "t_name": "Interfaith Guld LLC",
+        "t_addr": "Pineuhrst, #60 Prestonfield Dr, North Carolina",
+        "rank": 303
+      },
+      {
+        "s1_id": "S1-617597271",
+        "s1_name": "Interfaith Guild LLC",
+        "s1_addr": "60 Prestonfield Drive, Southern Pines, NC",
+        "target_id": "S3-527130234",
+        "t_name": "Interfaith Gui1d (LLC)",
+        "t_addr": "#60 Prestonfield Drive, Pinnehurst, North Carolina",
+        "rank": 305
+      }
+    ],
+    "shared_tokens_are_generic_stop_tokens": [
+      {
+        "s1_id": "S1-155302065",
+        "s1_name": "Qudynon Co",
+        "s1_addr": "1233 Kinghorn Circle, Grove City, OH",
+        "target_id": "S3-109950164",
+        "t_name": "Quodyoonn Co",
+        "t_addr": "1233 Klnghorn Cir, Groe City, Ohio",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-509674957",
+        "s1_name": "Analytica Group",
+        "s1_addr": "152 Sakhar Peth, Solapur, Sholapur, Maharashtra",
+        "target_id": "S3-45095192",
+        "t_name": "Aalynica (Group)",
+        "t_addr": "No 1-52 Sakhar Peth, Sholapur, Solapur, MH",
+        "rank": -1
+      },
+      {
+        "s1_id": "S1-973067000",
+        "s1_name": "Neon City LLC",
+        "s1_addr": "205 Meadowlark Drive, Alabaster, AL",
+        "target_id": "S2-128130276",
+        "t_name": "Ne0n City",
+        "t_addr": "205 MEADOWLARK DR, ALABASTR, AL",
+        "rank": -1
+      }
+    ]
+  }
+}
