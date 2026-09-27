@@ -177,3 +177,82 @@ python scripts/train_and_evaluate.py
 ```powershell
 python scripts/infer.py --test-dir dataset/test_sample --output-dir output/submission --chunk-size 500
 ```
+
+---
+
+## SageMaker custom training container
+
+The SageMaker entry point is [train.py](train.py). It preserves the production
+34-feature entity-resolution flow: multi-stage blocking, hard-negative mining,
+LightGBM training, isotonic calibration, and validation F0.5 threshold tuning.
+It writes `matching_model.pkl` and `training_manifest.json` to `/opt/ml/model`;
+it also writes a training summary to `/opt/ml/output`.
+
+SageMaker must provide four named input channels. Files may have arbitrary
+names (and a channel may contain multiple TSV files), but their tab-separated
+headers must be:
+
+| SageMaker channel | Mount path | Required columns |
+| --- | --- | --- |
+| `ground_truth` | `/opt/ml/input/data/ground_truth` | `source1_entity_id`, `matched_entity_ids` |
+| `source1` | `/opt/ml/input/data/source1` | `entity_id`, `business_name`, `business_address`, `country` |
+| `source2` | `/opt/ml/input/data/source2` | `entity_id`, `business_name`, `business_address`, `country` |
+| `source3` | `/opt/ml/input/data/source3` | `entity_id`, `business_name`, `business_address`, `country` |
+
+The image contains code and dependencies only—never training data. The default
+record caps match the existing experiment runner (3,000 train and 1,500
+validation Source 1 entities). Pass `--max-train-records 0 --max-validation-records 0`
+to train on every eligible Source 1 record.
+
+### Windows PowerShell: build and local test
+
+Run these commands from the repository root. Docker Desktop must be running.
+
+```powershell
+# Check Docker
+docker version
+docker info
+
+# Build the SageMaker training image
+docker build --tag entity-resolution-training:latest .
+
+# Prepare SageMaker-like local channel mounts (copies are intentionally outside the image)
+$localTest = Join-Path $PWD "sagemaker-local-test"
+New-Item -ItemType Directory -Force "$localTest\input\ground_truth", "$localTest\input\source1", "$localTest\input\source2", "$localTest\input\source3", "$localTest\model", "$localTest\output"
+Copy-Item .\dataset\train\train_ground_truth.tsv "$localTest\input\ground_truth\ground_truth.tsv"
+Copy-Item .\dataset\train\train_source1.tsv "$localTest\input\source1\source1.tsv"
+Copy-Item .\dataset\train\train_source2.tsv "$localTest\input\source2\source2.tsv"
+Copy-Item .\dataset\train\train_source3.tsv "$localTest\input\source3\source3.tsv"
+
+# Run the container (use small caps first; SageMaker will pass `train` automatically)
+docker run --rm `
+  -v "${localTest}\input:/opt/ml/input/data:ro" `
+  -v "${localTest}\model:/opt/ml/model" `
+  -v "${localTest}\output:/opt/ml/output" `
+  entity-resolution-training:latest train `
+  --max-train-records 100 --max-validation-records 50 --distractor-records-per-source 1000
+
+# Verify the local artifacts
+Get-ChildItem "$localTest\model"
+Get-Content "$localTest\output\training_summary.json"
+```
+
+### Windows PowerShell: tag and push to ECR
+
+Replace the placeholders with your AWS account ID and region. Create the ECR
+repository once in AWS before pushing.
+
+```powershell
+$awsAccountId = "123456789012"
+$awsRegion = "us-east-1"
+$ecrRegistry = "$awsAccountId.dkr.ecr.$awsRegion.amazonaws.com"
+
+# Tag the local image for ECR
+docker tag entity-resolution-training:latest "$ecrRegistry/entity-resolution-training:latest"
+
+# Authenticate Docker to ECR
+aws ecr get-login-password --region $awsRegion | docker login --username AWS --password-stdin $ecrRegistry
+
+# Push the image
+docker push "$ecrRegistry/entity-resolution-training:latest"
+```

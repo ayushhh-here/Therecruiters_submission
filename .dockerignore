@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__/
+*.py[cod]
+dataset/
+models/
+output/
+reports/
+splits/
+tests/
+code/
+Documentation_template.md
+requirements-lock.txt
