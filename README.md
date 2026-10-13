@@ -256,3 +256,4 @@ aws ecr get-login-password --region $awsRegion | docker login --username AWS --p
 # Push the image
 docker push "$ecrRegistry/entity-resolution-training:latest"
 ```
+"# parth" 
